@@ -1,0 +1,6 @@
+# frontend/.dockerignore
+.git
+.env
+__pycache__
+*.pyc
+.vscode/

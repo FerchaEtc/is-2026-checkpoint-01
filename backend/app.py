@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Configuración de BD usando las variables de tu archivo .env
+# Configuración de BD usando las variables los archivos .env
 DB_CONFIG = {
     "host": os.getenv("DB_HOST", "database"),
     "database": os.getenv("DB_NAME", "teamboard_db"),

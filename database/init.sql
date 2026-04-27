@@ -13,4 +13,4 @@ INSERT INTO members (nombre, apellido, legajo, feature, servicio) VALUES
     ('Bautista', 'Flores', '32223', 'Feature 02 — Frontend', 'frontend:8080'),
     ('Nahuel', 'Iroz', '27019', 'Feature 03 — Backend', 'backend:5000'),
     ('Fermin', 'Etchanchu Paoltroni', '30446', 'Feature 04 — Base de datos', 'db'),
-    ('Bautista', 'Flores', '32223', 'Feature 05 — Panel Portainer', 'portainer:9000'),
+    ('Bautista', 'Flores', '32223', 'Feature 05 — Panel Portainer', 'portainer:9000');

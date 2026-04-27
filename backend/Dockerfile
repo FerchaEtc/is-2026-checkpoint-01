@@ -1,7 +1,7 @@
 FROM python:3.12-slim
 
 # Por seguridad, creamos un usuario que no sea root
-RUN useradd -m appuser
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/* && useradd -m appuser
 WORKDIR /app
 
 # Copiamos e instalamos dependencias

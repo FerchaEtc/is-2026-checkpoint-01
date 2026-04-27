@@ -2,9 +2,19 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 import psycopg2
 import os
+import requests
 
 app = Flask(__name__)
 CORS(app)
+
+SERVICE_URLS = {
+    "frontend:8080": "http://frontend:8080/",
+    "backend:5000": "http://backend:5000/api/health",
+    "db": "db",
+    "compose / repo": None,
+    "portainer:9000": "http://portainer:9000/api/status",
+    "pgadmin:5050": "http://pgadmin:5050/"
+}
 
 # Configuración de BD usando las variables los archivos .env
 DB_CONFIG = {
@@ -20,12 +30,41 @@ def health():
 
 @app.route('/api/team', methods=['GET'])
 def get_team():
+    def check_service_status(servicio):
+        if servicio == "db":
+            try:
+                conn = psycopg2.connect(**DB_CONFIG)
+                conn.close()
+                return "online"
+            except:
+                return "offline"
+        
+        url = SERVICE_URLS.get(servicio)
+        if not url:
+            return "unknown"
+        try:
+            response = requests.get(url, timeout=3)
+            return "online" if response.status_code == 200 else "offline"
+        except:
+            return "offline"
+
     try:
         conn = psycopg2.connect(**DB_CONFIG)
         cur = conn.cursor()
-        cur.execute("SELECT nombre, apellido, legajo, feature, servicio, estado FROM members;")
+        cur.execute("SELECT nombre, apellido, legajo, feature, servicio FROM members;")
         rows = cur.fetchall()
-        team = [{"nombre": r[0], "apellido": r[1], "legajo": r[2], "feature": r[3], "servicio": r[4], "estado": r[5]} for r in rows]
+        team = []
+        for r in rows:
+            servicio = r[4]
+            estado = check_service_status(servicio)
+            team.append({
+                "nombre": r[0],
+                "apellido": r[1],
+                "legajo": r[2],
+                "feature": r[3],
+                "servicio": servicio,
+                "estado": estado
+            })
         cur.close()
         conn.close()
         return jsonify(team)

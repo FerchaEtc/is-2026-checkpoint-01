@@ -18,7 +18,7 @@ SERVICE_URLS = {
 
 # Configuración de BD usando las variables los archivos .env
 DB_CONFIG = {
-    "host": os.getenv("DB_HOST", "database"),
+    "host": os.getenv("DB_HOST", "db"),
     "database": os.getenv("DB_NAME", "teamboard_db"),
     "user": os.getenv("DB_USER", "admin"),
     "password": os.getenv("DB_PASS", "admin_pass")

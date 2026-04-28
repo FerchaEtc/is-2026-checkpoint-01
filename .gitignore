@@ -14,3 +14,6 @@ venv/
 
 # Docker
 .docker/
+
+# Archivo macos
+.DS_Store

@@ -20,3 +20,13 @@
   + Frontend → http://localhost:8080;
   + Backend → http://localhost:5000;
   + Portainer → http://localhost:9000.
+
+### Instrucciones para Portainer
+
+1. **Acceso a la Interfaz:** Ingresar desde la web a [http://localhost:9000](http://localhost:9000).
+2. **Credenciales (Primer ingreso):** - Al ser una instalación limpia montada en un volumen nuevo, Portainer solicita la creación de un usuario administrador. 
+   - Definir un nombre de usuario y una contraseña segura.
+3. **Conexión al Entorno Local:** - Una vez iniciada la sesión, selecciona la opción "Get Started".
+   - Esto conecta a Portainer con el socket de Docker del host (`/var/run/docker.sock`), le otorga permisos para visualizar y administrar los contenedores del proyecto.
+
+(La imagen con los contenedores corriendo se encuentra en el directorio `/docs` del repositorio).
